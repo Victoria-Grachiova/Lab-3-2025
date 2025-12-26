@@ -44,6 +44,55 @@ public class Main {
             }
 
             printPoints(func);
+            // 1. Тестирование getFunctionValue (линейная интерполяция)
+            System.out.println("\n Тест getFunctionValue (линейная интерполяция):");
+            System.out.printf("   f(-4.0) = %.4f%n", func.getFunctionValue(-4.0));
+            System.out.printf("   f(-2.5) = %.4f%n", func.getFunctionValue(-2.5));
+            System.out.printf("   f(0.0) = %.4f%n", func.getFunctionValue(0.0));
+            System.out.printf("   f(2.5) = %.4f%n", func.getFunctionValue(2.5));
+            System.out.printf("   f(4.0) = %.4f%n", func.getFunctionValue(4.0));
+
+            // 2. Тестирование граничных значений
+            System.out.println("\n Тест граничных значений:");
+            System.out.printf("   Левая граница: f(%.2f) = %.4f%n",
+                    func.getLeftDomainBorder(), func.getFunctionValue(func.getLeftDomainBorder()));
+            System.out.printf("   Правая граница: f(%.2f) = %.4f%n",
+                    func.getRightDomainBorder(), func.getFunctionValue(func.getRightDomainBorder()));
+            System.out.printf("   Вне области определения: f(10.0) = %f%n", func.getFunctionValue(10.0));
+
+            // 3. Тестирование добавления точки
+            System.out.println("\n Тест добавления новой точки (x=7.0, y=0.5):");
+            func.addPoint(new FunctionPoint(7.0, 0.5));
+            System.out.println("   Точка добавлена. Теперь точек: " + func.getPointsCount());
+            printPoints(func);
+
+            // 4. Тестирование изменения точки
+            System.out.println("\n Тест изменения точки с индексом 3:");
+            FunctionPoint oldPoint = func.getPoint(3);
+            System.out.printf("   Старая точка: (%.2f, %.2f)%n", oldPoint.getter_x(), oldPoint.getter_y());
+            func.setPoint(2, new FunctionPoint(0.0, 0.6));
+            System.out.println("   Точка изменена:");
+            printPoints(func);
+
+            // 5. Тестирование удаления точки
+            System.out.println("\n Тест удаления точки с индексом 3:");
+            func.deletePoint(3);
+            System.out.println("   Точка удалена. Теперь точек: " + func.getPointsCount());
+            printPoints(func);
+
+            // 6. Тестирование отдельных методов get/set
+            System.out.println("\n Тест отдельных методов get/set:");
+            System.out.printf("   getPointX(1) = %.2f%n", func.getPointX(1));
+            System.out.printf("   getPointY(1) = %.2f%n", func.getPointY(1));
+
+            func.setPointX(1, -3.5);
+            func.setPointY(1, 2.0);
+            System.out.println("   После setPointX(1, -3.5) и setPointY(1, 2.0):");
+
+            System.out.println("\n Проверка методов getLeftDomainBorder и getRightDomainBorder:");
+            System.out.printf("   getLeftDomainBorder() = %.2f%n", func.getLeftDomainBorder());
+            System.out.printf("   getRightDomainBorder() = %.2f%n", func.getRightDomainBorder());
+
 
         } catch (Exception e) {
             System.out.println("Ошибка: " + e.getMessage());

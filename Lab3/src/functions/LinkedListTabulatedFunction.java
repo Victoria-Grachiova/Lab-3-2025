@@ -275,6 +275,9 @@ public class LinkedListTabulatedFunction implements TabulatedFunction {
         FunctionNode curr = head.next;
         while (curr.next != head) {
             double x1 = curr.point.getter_x();
+            if (Math.abs(x - x1) < 1e-10) {
+                return curr.point.getter_y();
+            }
             double x2 = curr.next.point.getter_x();
 
             if (x >= x1 && x <= x2) {
